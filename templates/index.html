@@ -10,6 +10,21 @@
 <!--    <link rel="stylesheet" href="./secondApp.css">-->
 <!--    <link rel="stylesheet" href="css.css">-->
 
+ <script>
+        // Function to set back the placeholder without clearing the input
+        function setPlaceholder() {
+            // Get the input element by its name attribute
+            var inputElement = document.querySelector('input[name="sentence"]');
+
+            // Get the original placeholder text from the input element
+            var originalPlaceholder = inputElement.getAttribute("placeholder");
+
+            // Set the placeholder back to its original value
+            inputElement.setAttribute("placeholder", originalPlaceholder);
+        }
+    </script>
+
+
 
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
@@ -127,17 +142,31 @@
         background: blue;
 
        }
-        .Output{
-          margin: 20px;
-            height: 50px;
-            padding: 12px;
-            align-content: center;
-            border: 2px solid seashell;
-            background: burlywood;
+        {#.Output{#}
+        {#  margin: 20px;#}
+        {#    height: 50px;#}
+        {#    padding: 12px;#}
+        {#    align-content: center;#}
+        {#    border: 2px solid seashell;#}
+        {#    background: burlywood;#}
+        {#}#}
+        {#.Output SPAN{#}
+        {#    color: aqua;#}
+        {#    font-family: "Helvetica Neue", sans-serif;#}
+        {#    font-weight: bold;#}
+        {#}#}
+
+         .Output {
+            margin-top: 20px;
+            padding: 30px;
+            border: 2px solid #f0f0f0;
+            background: #f8f8f8;
+            border-radius: 4px;
+            text-align: center;
         }
-        .Output SPAN{
-            color: aqua;
-            font-family: "Helvetica Neue", sans-serif;
+
+        .Output SPAN {
+            color: #007bff;
             font-weight: bold;
         }
     </style>
@@ -152,20 +181,18 @@
 
                         <div class="search">
                           <i class="fa fa-search"></i>
-                          <input type="text" class="form-control" placeholder="bir yorum girin" name="sentence">
-                          <button class="btn btn-primary">PREDICT</button>
+                          <input type="text" class="form-control" id="sentence" placeholder="yorumu girin" name="sentence" value="{{ request.args.get('sentence', '') }}">
+                          <button class="btn btn-primary" onclick="setPlaceholder()">PREDICT</button>
 
                         </div >
 
-                          <div class="Output"> BU YORUM <SPAN> {{message}}</SPAN>  ALTINDADIR</div>
+                          <div class="Output"> BU YORUM <SPAN>[{{ sentence }}] </SPAN> DUYGUSU <SPAN> {{message}}</SPAN>  VE BU SINIFIN  <SPAN>{{ sinif }}</SPAN>  ALTINDADIR</div>
 
                       </div>
 
                     </div>
                 </div>
 </form>
-
-
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

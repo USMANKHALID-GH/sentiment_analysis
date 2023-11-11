@@ -19,7 +19,7 @@ def making_prediction(sentence):
         print(__model)
 
     # model yukleme
-    __model2 = tf.keras.models.load_model("tweetter.h5")
+    __model2 = tf.keras.models.load_model("tweetter1.h5")
     # gelen cumle list donusturme
     sentence = [sentence]
     # gelen cumle sequence alma
@@ -28,10 +28,13 @@ def making_prediction(sentence):
     padded = pad_sequences(sequences, maxlen=100, padding='post', truncating='post')
     # tahmin etme
     prediction = __model2.predict(padded)
+    print(prediction)
     return prediction
 
 
 if __name__ == '__main__':
     prd = making_prediction("bugun hava -5 derece oldugu ıcın kızgınım")
-    enyuksek = np.argmax(prd)
+    enyuksek = np.argmax(prd[1])
+    enyuksek1 = np.argmax(prd[0])
+    print(enyuksek1)
     print(enyuksek)

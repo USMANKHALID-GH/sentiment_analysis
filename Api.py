@@ -16,17 +16,32 @@ def tweeter_senti():
     if request.method == 'POST':
         senti = request.form['sentence']
         pred = utils.making_prediction(senti)
-        group = np.argmax(pred)
-        print(group)
-        output = ""
-        if group == 0:
-            output = "negatif"
-        elif group == 1:
-            output = "notr"
-        elif group == 2:
-            output = "positif"
+        pred1 = np.argmax(pred[0])
+        pred2 = np.argmax(pred[1])
+        output1 = ""
+        output2 = ""
+        if pred1 == 0:
+            output1 = "negatif"
+        elif pred1 == 1:
+            output1 = "pozitif"
 
-        return render_template("index.html", message=f' {output} '.upper())
+        if pred2 == 0:
+            output2 = "dunya"
+        elif pred2 == 1:
+            output2 = "ekonomi"
+        elif pred2 == 2:
+            output2 = "kultur"
+        elif pred2 == 3:
+            output2 = "saglik"
+        elif pred2 == 4:
+            output2 = "siyaset"
+        elif pred2 == 5:
+            output2 = "spor"
+        elif pred2 == 6:
+            output2 = "teknoloji"
+        print(pred)
+
+        return render_template("index.html", message=f' {output1} '.upper(), sinif=f" {output2} ".upper() , sentence=senti)
 
 
 if __name__ == '__main__':
